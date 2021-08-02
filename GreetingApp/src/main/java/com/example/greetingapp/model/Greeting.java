@@ -1,8 +1,18 @@
 package com.example.greetingapp.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Greeting {
+    @Id
     private long id;
     private String message;
+
+    public Greeting(){
+        id = 0;
+        message = " ";
+    }
 
     public Greeting(long id, String message) {
         this.id = id;

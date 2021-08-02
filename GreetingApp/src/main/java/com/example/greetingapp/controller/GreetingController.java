@@ -1,9 +1,7 @@
 package com.example.greetingapp.controller;
 
 import com.example.greetingapp.model.Greeting;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -16,5 +14,15 @@ public class GreetingController {
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "world") String name){
         return new Greeting(counter.incrementAndGet(),
                 String.format(greetTemplate,name));
+    }
+
+    @PostMapping("/post_greeting")
+    public Greeting postGreeting(@RequestBody Greeting greeting){
+        return greeting;
+    }
+
+    @PutMapping("/put_mapping")
+    public Greeting putGreeting(@PathVariable long id, @RequestParam(value = "name") String name){
+        return new Greeting(id, String.format(greetTemplate,name));
     }
 }
